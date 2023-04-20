@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function fetchProducts(amount = 1) {
+export function fetchProducts( ) {
   return axios.get('http://localhost:8080/products')
-  );
+
 }

@@ -1,66 +1,32 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from './ProductSlice';
-import styles from './Counter.module.css';
+import styles from './Products.module.css';
+import { fetchAsync } from './productsSlice';
 
-export function Counter() {
-  const count = useSelector(selectCount);
+export function Products() {
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const products = useSelector(state=>state.product.products);
 
-  const incrementValue = Number(incrementAmount) || 0;
 
   return (
     <div>
-      <div className={styles.row}>
+      <div >
         <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => {dispatch(fetchAsync())
+          console.log(fetchAsync())}}
         >
-          -
+          Fetch Products
         </button>
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
-          Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
-        </button>
+        { products.map(product=> 
+        <div className={styles.card}>   
+          <img src={product.thumbnail} alt={product.title} style={{width:"100%"}}/>
+          <h1>{product.title}</h1>
+          <p className={styles.price}>${product.price}</p>
+          <p>{product.description}</p>
+          <p><button>Add to Cart</button></p>
+        </div>)}
+       
+       
       </div>
     </div>
   );

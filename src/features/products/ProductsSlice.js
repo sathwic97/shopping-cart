@@ -6,9 +6,10 @@ const initialState = {
   status: 'idle',
 };
 export const fetchAsync = createAsyncThunk(
-  'products/fetchProducts',
+  'products/fetchProduct',
   async () => {
-    const response = await fetchProducts(); 
+    const response = await fetchProducts();
+    console.log(response);
     return response.data;
   }
 );
@@ -17,27 +18,19 @@ export const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
+
   },
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(fetchAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(fetchAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
+        state.products = action.payload ;
       });
   },
 });
 
-export const { increment, decrement, incrementByAmount } = productsSlice.actions;
+// export const {  } = productsSlice.actions;
 export default productsSlice.reducer;
