@@ -24,6 +24,28 @@ export const addAsync = createAsyncThunk(
   }
 );
 
+export const deleteAsync = createAsyncThunk(
+  'cart/deleteItem',
+  async (id) => {
+    
+    await deleteItem(id);
+   
+    return id;
+  }
+);
+
+export const updateAsync = createAsyncThunk(
+  'cart/updateItem',
+  async ({id,change}) => {
+    
+    const response = await updateItem(id, change);
+   
+    return response.data;
+  }
+);
+
+
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -42,6 +64,16 @@ export const cartSlice = createSlice({
       .addCase(addAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.items.push(action.payload) ;
+      })
+      .addCase(deleteAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const index = state.items.findIndex(item=> item.id === action.payload)
+        state.items.splice(index,1) ;
+      })
+      .addCase(updateAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const index = state.items.findIndex(item=> item.id === action.payload.id)
+        state.items.splice(index,1, action.payload) ;
       });
   },
 });

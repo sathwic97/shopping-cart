@@ -1,7 +1,5 @@
-
 {
-  "products": 
-  [
+  "products": [
     {
       "id": 1,
       "title": "iPhone 9",
@@ -555,8 +553,14 @@
       ]
     }
   ],
-  "cart":
-  [
-
+  "cart": [
+    {
+      "id": 5,
+      "title": "Huawei P30",
+      "brand": "Huawei",
+      "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+      "price": 499,
+      "quantity": 1
+    }
   ]
 }

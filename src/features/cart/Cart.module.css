@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items:flex-start;
   padding:0 1rem;
+  
 }
 
 .image{
@@ -13,10 +14,12 @@
   padding:1rem
 }
 
-.cart-item{
+.cart{
   display:flex;
   flex-direction: column;
+  flex-wrap: wrap;
   border:1px solid grey;
+  max-height:140px;
   justify-content:space-around;
 
 }

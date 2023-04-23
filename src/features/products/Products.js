@@ -10,7 +10,7 @@ export function Products() {
 
 useEffect(()=>{
   dispatch(fetchAsync())
-},[])
+},[ ])
   return (
     <div>
       <div >
@@ -23,7 +23,7 @@ useEffect(()=>{
           <p>{product.description}</p>
           <p><button
           onClick={()=>{
-            dispatch(addAsync())
+            dispatch(addAsync(product))
 
           }}>Add to Cart</button></p>
         </div>)}
